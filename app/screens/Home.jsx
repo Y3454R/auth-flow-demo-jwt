@@ -1,12 +1,29 @@
-import { View, Text } from "react-native";
-import React from "react";
+import * as React from "react";
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
 
-const Home = () => {
+// import components
+
+import HomeScreen from "../components/HomeScreen";
+import CaptureScreen from "../components/CaptureScreen";
+
+const Stack = createStackNavigator();
+
+function Home() {
   return (
-    <View>
-      <Text>Home</Text>
-    </View>
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      <Stack.Screen name="Capture" component={CaptureScreen} />
+      {/* <Stack.Screen name="Settings" component={SettingsScreen} /> */}
+    </Stack.Navigator>
   );
-};
+}
 
+// export default function App() {
+//   return (
+//     <NavigationContainer>
+//       <MyStack />
+//     </NavigationContainer>
+//   );
+// }
 export default Home;
