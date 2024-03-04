@@ -1,7 +1,6 @@
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { StatusBar } from "expo-status-bar";
-import { StyleSheet, Text, View } from "react-native";
 import { AuthProvider, useAuth } from "./app/context/AuthContext";
 import { Button } from "react-native-paper";
 import Login from "./app/screens/Login";
@@ -12,13 +11,14 @@ const Stack = createNativeStackNavigator();
 export default function App() {
   return (
     <AuthProvider>
-      <Layout></Layout>
+      <Layout />
     </AuthProvider>
   );
 }
 
 export const Layout = () => {
   const { authState, logout } = useAuth();
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -27,13 +27,24 @@ export const Layout = () => {
             name="Home"
             component={Home}
             options={{
-              headerRight: () => <Button onPress={logout} title="Sign Out" />,
+              headerRight: () => (
+                <Button onPress={logout} style={styles.signOutButton}>
+                  Sign Out
+                </Button>
+              ),
             }}
-          ></Stack.Screen>
+          />
         ) : (
-          <Stack.Screen name="Login" component={Login}></Stack.Screen>
+          <Stack.Screen name="Login" component={Login} />
         )}
       </Stack.Navigator>
     </NavigationContainer>
   );
+};
+
+const styles = {
+  signOutButton: {
+    marginRight: 10,
+    color: "white", // Change color to contrast with header background
+  },
 };
