@@ -1,6 +1,7 @@
 import { View, Image, Button, StyleSheet, TextInput } from "react-native";
 import React, { useEffect, useState } from "react";
 import { API_URL, useAuth } from "../context/AuthContext";
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -10,7 +11,7 @@ const Login = () => {
   useEffect(() => {
     const testCall = async () => {
       const result = await axios.get(`${API_URL}/users`);
-      console.log("result[login:16]: ", result);
+      // console.log("result[login:16]: ", result);
     };
 
     testCall();

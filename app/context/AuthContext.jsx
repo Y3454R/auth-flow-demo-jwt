@@ -3,7 +3,8 @@ import axios from "axios";
 import * as SecureStore from "expo-secure-store";
 
 const TOKEN_KEY = "my-jwt";
-export const API_URL = "http://localhost:5000";
+// export const API_URL = "http://localhost:3000";
+export const API_URL = "http://192.168.0.103:3000";
 const AuthContext = createContext();
 
 export const useAuth = () => {
@@ -40,7 +41,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const result = await axios.post(`${API_URL}/auth`, { email, password });
+      const result = await axios.post(`${API_URL}/login`, { email, password });
 
       console.log("result:", result);
 
@@ -52,9 +53,12 @@ export const AuthProvider = ({ children }) => {
         "Authorization"
       ] = `Bearer ${result.data.token}`;
       await SecureStore.setItemAsync(TOKEN_KEY, result.data.token);
+      console.log(result.data.token);
       return result;
     } catch (e) {
-      return { error: true, msg: e.response.data.msg };
+      console.log(e);
+      return { error: true, msg: "login hocche na" };
+      // console.log("login hocche na!!!");
     }
   };
 
