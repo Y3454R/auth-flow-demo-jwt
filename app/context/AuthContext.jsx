@@ -58,7 +58,6 @@ export const AuthProvider = ({ children }) => {
     } catch (e) {
       console.log(e);
       return { error: true, msg: "login hocche na" };
-      // console.log("login hocche na!!!");
     }
   };
 
